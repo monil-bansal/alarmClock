@@ -34,16 +34,31 @@ const setAlarm = () => {
 
 };
 
+const stopAlarm =() => {
+	sound.pause();
+	sound.currentTime=0;
+	alarmOptions.style.display="none";
+}
+
+const snoozeAlarm =()=> {
+	stopAlarm();
+	setTimeout(initAlarm,5*60*1000);
+}
+
 const initAlarm = () =>{
-	console.log("monil");
-	alarmOptions.style.display="flex";
 	sound.play();
+	alarmOptions.style.display="flex";
 };
 
 alarmButton.addEventListener("click",setAlarm);
+
 alarmTimeInput.addEventListener("keydown",function(event){
 	if(event.which===13){
 		setAlarm();
 	}
 });
 
+stopBtn.addEventListener("click",stopAlarm);
+
+
+snoozeBtn.addEventListener("click",snoozeAlarm);
